@@ -24,6 +24,19 @@ class VideoManager with ChangeNotifier {
     final a = _videos.where((v) => v.id == video.id).first;
     a.isFavorite ? a.favoriteCount -= 1 : a.favoriteCount += 1;
     a.isFavorite = !a.isFavorite;
+    a.isVisble = a.isFavorite;
+
     notifyListeners();
+  }
+
+  void dismissAnimation(Video video) {
+    if (video.isVisble) {
+      Future.delayed(Duration(milliseconds: 1000)).then(
+        (_) {
+          video.isVisble = false;
+          notifyListeners();
+        },
+      );
+    }
   }
 }

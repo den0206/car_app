@@ -94,7 +94,25 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
               ),
             )
           : Center(
-              child: CircularProgressIndicator(backgroundColor: Colors.white),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  ),
+                  SizedBox(
+                    height: 24,
+                  ),
+                  Text(
+                    "Loading...",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24,
+                      decoration: TextDecoration.none,
+                    ),
+                  ),
+                ],
+              ),
             ),
     );
   }

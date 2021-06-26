@@ -1,4 +1,4 @@
-import 'package:car_app/src/screen/feed/feed.dart';
+import 'package:car_app/src/screen/feed/feed_screen.dart';
 import 'package:car_app/src/screen/upload/upload_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

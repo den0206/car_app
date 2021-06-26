@@ -14,7 +14,7 @@ class AnimationBackground extends StatefulWidget {
 
 class _AnimationBackgroundState extends State<AnimationBackground>
     with TickerProviderStateMixin {
-  AnimationController? _animationController;
+  late AnimationController _animationController;
   Animation<double>? _animation;
   int index = 0;
 
@@ -26,7 +26,7 @@ class _AnimationBackgroundState extends State<AnimationBackground>
     _animationController =
         AnimationController(vsync: this, duration: Duration(seconds: 5));
     _animation =
-        CurvedAnimation(parent: _animationController!, curve: Curves.linear)
+        CurvedAnimation(parent: _animationController, curve: Curves.linear)
           ..addListener(() {
             setState(() {});
           })
@@ -37,16 +37,16 @@ class _AnimationBackgroundState extends State<AnimationBackground>
               if (index == widget.images.length) {
                 index = 0;
               }
-              _animationController?.reset();
-              _animationController?.forward();
+              _animationController.reset();
+              _animationController.forward();
             }
           });
-    _animationController?.forward();
+    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _animationController?.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 

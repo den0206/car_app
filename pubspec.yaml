@@ -23,12 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  badges: ^2.0.1
   cached_network_image: ^3.0.0
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.0+4
   provider: ^5.0.0
   uuid: ^3.0.4
-
   video_player: ^2.1.6
   video_thumbnail: ^0.3.3
 

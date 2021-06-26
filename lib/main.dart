@@ -1,6 +1,7 @@
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/bottom_tab.dart';
+import 'package:car_app/src/screen/feed/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<VideoManager, FavoriteManager>(
           create: (context) => FavoriteManager(),
           lazy: false,
-          update: (context, videoManager, favoriteManager) =>
+          update: (context, videoManager, FavoriteManager? favoriteManager) =>
               favoriteManager!..updateVideoManager(videoManager),
         )
       ],
@@ -33,6 +34,9 @@ class MyApp extends StatelessWidget {
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: Colors.black,
         ),
+        routes: {
+          FavoritsScreen.routeName: (context) => FavoritsScreen(),
+        },
         home: BottomBarScreen(),
       ),
     );

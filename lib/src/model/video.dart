@@ -29,4 +29,5 @@ class Video {
   int favoriteCount;
   int shareCount;
   bool isFavorite = false;
+  bool isVisble = false;
 }
