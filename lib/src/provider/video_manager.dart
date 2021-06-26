@@ -27,14 +27,11 @@ class VideoManager with ChangeNotifier {
     a.isVisble = a.isFavorite;
 
     notifyListeners();
-  }
 
-  void dismissAnimation(Video video) {
     if (video.isVisble) {
-      Future.delayed(Duration(milliseconds: 1000)).then(
+      Future.delayed(Duration(milliseconds: 20)).then(
         (_) {
           video.isVisble = false;
-          notifyListeners();
         },
       );
     }

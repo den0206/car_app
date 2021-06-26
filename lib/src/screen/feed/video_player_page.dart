@@ -1,3 +1,4 @@
+import 'package:car_app/src/extension/overlay_loading_widget.dart';
 import 'package:car_app/src/model/video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
@@ -93,27 +94,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                 ],
               ),
             )
-          : Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
-                  SizedBox(
-                    height: 24,
-                  ),
-                  Text(
-                    "Loading...",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 24,
-                      decoration: TextDecoration.none,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          : PlainLoadingWidget(),
     );
   }
 }

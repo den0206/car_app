@@ -1,3 +1,6 @@
+import 'package:badges/badges.dart';
+import 'package:car_app/src/data/consts_color.dart';
+import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/screen/feed/feed_screen.dart';
 import 'package:car_app/src/screen/upload/upload_screen.dart';
 import 'package:flutter/material.dart';
@@ -45,9 +48,23 @@ class BottomBarScreen extends StatelessWidget {
             currentIndex: model.currentIndex,
             items: [
               BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.home,
-                ),
+                icon: Consumer<FavoriteManager>(builder: (_, model, __) {
+                  return Badge(
+                      badgeColor: ConstsColor.favBadgeColor,
+                      animationType: BadgeAnimationType.slide,
+                      showBadge: model.favVideos.length > 0,
+                      toAnimate: true,
+                      position: BadgePosition.topEnd(),
+                      badgeContent: Text(
+                        model.favVideos.length.toString(),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      child: Icon(
+                        Icons.home,
+                      ));
+                }),
                 label: "Feeds",
               ),
               BottomNavigationBarItem(

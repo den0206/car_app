@@ -31,9 +31,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: "Car App",
         theme: ThemeData(
-          primarySwatch: Colors.blue,
-          scaffoldBackgroundColor: Colors.black,
-        ),
+            primarySwatch: Colors.blue,
+            scaffoldBackgroundColor: Colors.black,
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.grey,
+            )),
         routes: {
           FavoritsScreen.routeName: (context) => FavoritsScreen(),
         },

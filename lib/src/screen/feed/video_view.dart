@@ -1,11 +1,16 @@
 import 'dart:math';
 
+import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:car_app/src/data/consts_color.dart';
 import 'package:car_app/src/model/video.dart';
+import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/feed/video_player_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
+import 'favorite_screen.dart';
 
 class VideoView extends StatelessWidget {
   const VideoView({
@@ -21,25 +26,64 @@ class VideoView extends StatelessWidget {
       children: [
         VideoPlayerPage(video: video),
         VideoOverlayView(video: video),
-        AnimatedOpacity(
-          opacity: video.isFavorite ? 1.0 : 0.0,
-          duration: Duration(milliseconds: 300),
-          onEnd: () {
-            context.read<VideoManager>().dismissAnimation(video);
-          },
-          curve: Curves.easeInBack,
-          child: Visibility(
-            visible: video.isVisble,
-            child: Center(
-              child: Icon(
-                Icons.favorite,
-                size: 150.0,
-                color: Colors.red,
-              ),
-            ),
-          ),
-        )
+        if (video.isFavorite && video.isVisble) FavoriteActionView()
       ],
+    );
+  }
+}
+
+class FavoriteActionView extends StatefulWidget {
+  FavoriteActionView({Key? key}) : super(key: key);
+
+  @override
+  _FavoriteActionViewState createState() => _FavoriteActionViewState();
+}
+
+class _FavoriteActionViewState extends State<FavoriteActionView>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 700));
+    animation =
+        CurvedAnimation(parent: controller, curve: Curves.easeInOutBack);
+
+    controller.forward();
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.reverse();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    animation.removeStatusListener((status) {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(
+      opacity: animation,
+      child: Center(
+        child: RotationTransition(
+          turns: Tween(begin: 0.0, end: -.1)
+              .chain(CurveTween(curve: Curves.elasticIn))
+              .animate(controller),
+          child: Icon(
+            Icons.favorite,
+            color: ConstsColor.favColor,
+            size: 170,
+          ),
+        ),
+      ),
     );
   }
 }
@@ -106,24 +150,31 @@ class VideoOverlayView extends StatelessWidget {
                         context.read<VideoManager>().manageFavorite(video);
                       },
                     ),
-                    _VideoIconButton(
-                      text: "Comment",
-                      icon: Icon(Icons.comment, size: 45, color: Colors.white),
-                      onPressed: () {
-                        print("Comment");
-                      },
-                    ),
-                    _VideoIconButton(
-                      text: "here",
-                      icon: Icon(
-                        Icons.reply,
-                        size: 45,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        print("Share");
-                      },
-                    ),
+                    Consumer<FavoriteManager>(builder: (_, model, __) {
+                      return Badge(
+                        badgeColor: ConstsColor.favBadgeColor,
+                        animationType: BadgeAnimationType.slide,
+                        toAnimate: true,
+                        position: BadgePosition.topEnd(top: 4, end: -4),
+                        badgeContent: Text(
+                          model.favVideos.length.toString(),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.card_travel,
+                            color: Colors.yellow.withOpacity(0.8),
+                            size: 50,
+                          ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, FavoritsScreen.routeName);
+                          },
+                        ),
+                      );
+                    }),
                     CirculeAnimation(
                       _AnimationProfile(),
                     ),
@@ -245,3 +296,22 @@ class _AnimationProfile extends StatelessWidget {
     );
   }
 }
+
+// AnimatedOpacity(
+//       opacity: video.isFavorite ? 1.0 : 0.0,
+//       duration: Duration(milliseconds: 300),
+//       onEnd: () {
+//         context.read<VideoManager>().dismissAnimation(video);
+//       },
+//       curve: Curves.easeInBack,
+//       child: Visibility(
+//         visible: video.isVisble,
+//         child: Center(
+//           child: Icon(
+//             Icons.favorite,
+//             size: 150.0,
+//             color: Colors.red,
+//           ),
+//         ),
+//       ),
+//     )

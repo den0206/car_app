@@ -26,6 +26,8 @@ class Video {
   File? thumbnail;
   String title;
 
+  bool get fromSample => videoUrl != null && thumbUrl != null;
+
   int favoriteCount;
   int shareCount;
   bool isFavorite = false;
