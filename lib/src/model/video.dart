@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:uuid/uuid.dart';
 
@@ -23,7 +24,7 @@ class Video {
   String? videoUrl;
   String? thumbUrl;
   File? videoFile;
-  File? thumbnail;
+  Uint8List? thumbnail;
   String title;
 
   bool get fromSample => videoUrl != null && thumbUrl != null;

@@ -42,9 +42,8 @@ class UploadScreen extends StatelessWidget {
         children: [
           AnimationBackground(images: images),
           Center(
-            child: CustomButton(
+            child: CustomGradientButton(
               title: "Upload",
-              backColor: Colors.black,
               onPressed: () async {
                 await showModalBottomSheet(
                   context: context,

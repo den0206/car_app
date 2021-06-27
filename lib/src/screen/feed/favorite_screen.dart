@@ -93,7 +93,10 @@ class _VideoCell extends StatelessWidget {
                     ],
                   )),
                 )
-              : Container(),
+              : Image.memory(
+                  video.thumbnail!,
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
     );

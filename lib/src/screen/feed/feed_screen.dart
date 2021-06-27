@@ -1,3 +1,4 @@
+import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/feed/video_view.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,14 @@ class FeedScreen extends StatelessWidget {
               itemCount: model.videos.length,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
-                return VideoView(video: model.videos[index]);
+                /// exxample
+                final randomUser =
+                    context.read<RandomUserManager>().users[index];
+
+                return VideoView(
+                  video: model.videos[index],
+                  user: randomUser,
+                );
               },
             ),
           ],

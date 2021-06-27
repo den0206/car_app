@@ -3,6 +3,7 @@ import 'package:car_app/src/data/consts_color.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/screen/feed/feed_screen.dart';
 import 'package:car_app/src/screen/upload/upload_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -73,8 +74,8 @@ class BottomBarScreen extends StatelessWidget {
                 label: "Upload",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person),
-                label: "User",
+                icon: Icon(CupertinoIcons.person_3_fill),
+                label: "Users",
               ),
             ],
           ),
@@ -83,17 +84,25 @@ class BottomBarScreen extends StatelessWidget {
       floatingActionButtonLocation:
           FloatingActionButtonLocation.miniCenterDocked,
       floatingActionButton: Padding(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(3),
         child: FloatingActionButton(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           hoverElevation: 10,
           splashColor: Colors.grey,
           onPressed: () {
             model.setIndex(1);
           },
-          child: Icon(
-            Icons.add,
-            color: Colors.black,
+          child: Container(
+            width: 60,
+            height: 60,
+            child: Icon(
+              Icons.add,
+              size: 40,
+            ),
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                    colors: [Colors.white.withOpacity(0.0), Colors.red])),
           ),
         ),
       ),

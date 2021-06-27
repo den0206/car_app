@@ -1,14 +1,14 @@
-import 'dart:math';
-
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:car_app/src/data/consts_color.dart';
+import 'package:car_app/src/model/user.dart';
 import 'package:car_app/src/model/video.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/feed/video_player_page.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter/material.dart';
 
 import 'favorite_screen.dart';
 
@@ -16,16 +16,18 @@ class VideoView extends StatelessWidget {
   const VideoView({
     Key? key,
     required this.video,
+    required this.user,
   }) : super(key: key);
 
   final Video video;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         VideoPlayerPage(video: video),
-        VideoOverlayView(video: video),
+        VideoOverlayView(video: video, user: user),
         if (video.isFavorite && video.isVisble) FavoriteActionView()
       ],
     );
@@ -92,9 +94,11 @@ class VideoOverlayView extends StatelessWidget {
   const VideoOverlayView({
     Key? key,
     required this.video,
+    required this.user,
   }) : super(key: key);
 
   final Video video;
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +180,7 @@ class VideoOverlayView extends StatelessWidget {
                       );
                     }),
                     CirculeAnimation(
-                      _AnimationProfile(),
+                      _AnimationProfile(user: user),
                     ),
                   ],
                 ),
@@ -262,7 +266,10 @@ class _CirculeAnimationState extends State<CirculeAnimation>
 class _AnimationProfile extends StatelessWidget {
   const _AnimationProfile({
     Key? key,
+    required this.user,
   }) : super(key: key);
+
+  final User user;
 
   @override
   Widget build(BuildContext context) {
@@ -283,8 +290,7 @@ class _AnimationProfile extends StatelessWidget {
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(25),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      "https://randomuser.me/api/portraits/med/men/${Random().nextInt(100)}.jpg",
+                  imageUrl: user.imageUrl,
                   placeholder: (context, url) => Icon(Icons.person),
                 )
 

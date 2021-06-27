@@ -49,6 +49,74 @@ class CustomButton extends StatelessWidget {
   }
 }
 
+class CustomGradientButton extends StatelessWidget {
+  const CustomGradientButton({
+    Key? key,
+    this.height = 50,
+    this.width = 200,
+    required this.title,
+    this.isLoading = false,
+    this.titleColor = Colors.white,
+    this.startColor,
+    this.endColor = Colors.blue,
+    required this.onPressed,
+  }) : super(key: key);
+
+  final double height;
+  final double width;
+
+  final String title;
+  final bool isLoading;
+  final Color titleColor;
+  final Color? startColor;
+  final Color endColor;
+  final Function() onPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+          primary: Colors.transparent,
+          padding: EdgeInsets.zero,
+          minimumSize: Size.zero,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))),
+      child: Ink(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [startColor ?? Colors.white.withOpacity(0.0), endColor],
+            stops: [
+              0.0,
+              0.6,
+            ],
+          ),
+        ),
+        child: Container(
+          width: width,
+          height: height,
+          alignment: Alignment.center,
+          child: !isLoading
+              ? Text(
+                  title,
+                  style: TextStyle(
+                    // backgroundColor: Colors.transparent,
+                    color: titleColor,
+                  ),
+                )
+              : CircularProgressIndicator(
+                  strokeWidth: 2,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+        ),
+      ),
+      onPressed: !isLoading ? onPressed : null,
+    );
+  }
+}
+
 class BackButtonWithStack extends StatelessWidget {
   const BackButtonWithStack({
     Key? key,

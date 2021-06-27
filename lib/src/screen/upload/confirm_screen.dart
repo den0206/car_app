@@ -58,15 +58,15 @@ class ConfirmScreenModel with ChangeNotifier {
     try {
       final Uint8List? thumbList = await VideoThumbnail.thumbnailData(
         video: videoFile.path,
+        imageFormat: ImageFormat.JPEG,
       );
 
       if (thumbList == null) {
         return;
       }
-      final thumbnail = File.fromRawPath(thumbList);
 
       final video = Video.fromCurrentUser(
-          videoFile: videoFile, thumbnail: thumbnail, title: title);
+          videoFile: videoFile, thumbnail: thumbList, title: title);
 
       onSuccess(video);
     } catch (e) {
@@ -91,16 +91,15 @@ class ConfirmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey,
-      body: ChangeNotifierProvider<ConfirmScreenModel>(
-        create: (context) =>
-            ConfirmScreenModel(videoFile: videoFile, path: path),
-        builder: (context, snapshot) {
-          return Consumer<ConfirmScreenModel>(builder: (_, model, __) {
-            return OverlayLoadingWidget(
-              isLoading: model.isLoading,
-              child: SingleChildScrollView(
+    return ChangeNotifierProvider<ConfirmScreenModel>(
+      create: (context) => ConfirmScreenModel(videoFile: videoFile, path: path),
+      builder: (context, snapshot) {
+        return Consumer<ConfirmScreenModel>(builder: (_, model, __) {
+          return OverlayLoadingWidget(
+            isLoading: model.isLoading,
+            child: Scaffold(
+              backgroundColor: Colors.grey,
+              body: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
@@ -115,37 +114,66 @@ class ConfirmScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 60,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 21),
                       child: CustomTextFields(
                         controller: model.titleController,
                         labelText: "Title",
                       ),
                     ),
-                    CustomButton(
-                      title: "Upload",
-                      onPressed: () {
-                        model.uploadVideo(
-                          onSuccess: (video) {
-                            Navigator.of(context).pop();
-                            context.read<VideoManager>().addVideo(video);
-                            context.read<BottomBarModel>().setIndex(0);
-                          },
-                          onFail: (e) {
-                            print(e);
-                          },
-                        );
-                      },
-                    )
                   ],
                 ),
               ),
-            );
-          });
-        },
-      ),
+              bottomNavigationBar: Container(
+                height: MediaQuery.of(context).size.height / 10,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  border: Border(
+                    top: BorderSide(color: Colors.black, width: 1.5),
+                  ),
+                ),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      model.uploadVideo(
+                        onSuccess: (video) {
+                          Navigator.of(context).pop();
+                          context.read<VideoManager>().addVideo(video);
+                          context.read<BottomBarModel>().setIndex(0);
+                        },
+                        onFail: (e) {
+                          print(e);
+                        },
+                      );
+                    },
+                    splashColor: Colors.white,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 2),
+                          child: Text(
+                            "Upload",
+                            style: TextStyle(
+                              fontSize: 16,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        Icon(Icons.upload),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          );
+        });
+      },
     );
   }
 }
