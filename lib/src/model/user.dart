@@ -25,7 +25,7 @@ class User {
         lastName = json[UserKey.name][UserKey.last] ?? "",
         email = json[UserKey.email] ?? "",
         phone = json[UserKey.phone] ?? "",
-        imageUrl = json[UserKey.picture][UserKey.medium] ?? "",
+        imageUrl = json[UserKey.picture][UserKey.large] ?? "",
         gender = json[UserKey.gender] ?? "";
 }
 
@@ -39,6 +39,7 @@ class UserKey {
   static final phone = "phone";
   static final picture = "picture";
   static final medium = "medium";
+  static final large = "large";
   static final gender = "gender";
 
   static final results = "results";

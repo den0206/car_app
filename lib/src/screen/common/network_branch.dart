@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:car_app/src/screen/common/no_wifi_screen.dart';
 import 'package:car_app/src/screen/root.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -61,14 +62,9 @@ class _NetworkBranchState extends State<NetworkBranch> {
       case ConnectivityResult.wifi:
       case ConnectivityResult.mobile:
         return Root();
-      case ConnectivityResult.none:
-        return Center(
-          child: Text("No Internet"),
-        );
+
       default:
-        return Center(
-          child: Text("No Internet"),
-        );
+        return NoWifiScreen();
     }
   }
 }

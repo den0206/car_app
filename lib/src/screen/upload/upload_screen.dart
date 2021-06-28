@@ -46,33 +46,47 @@ class UploadScreen extends StatelessWidget {
               title: "Upload",
               onPressed: () async {
                 await showModalBottomSheet(
+                  backgroundColor: Colors.transparent,
                   context: context,
                   builder: (context) {
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ListTile(
-                            leading: Icon(Icons.videocam),
-                            title: Text('Camera'),
-                            onTap: () {
-                              getVideo(ImageSource.camera);
-                            },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.camera),
-                            title: Text('Gallary'),
-                            onTap: () {
-                              getVideo(ImageSource.gallery);
-                            },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.close),
-                            title: Text('Cancel'),
-                            onTap: () => Navigator.of(context).pop(),
-                          ),
-                        ],
+                    return Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [Colors.grey, Colors.white.withOpacity(0.0)],
+                          stops: [
+                            0.1,
+                            0.7,
+                          ],
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 18),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ListTile(
+                              leading: Icon(Icons.videocam),
+                              title: Text('Camera'),
+                              onTap: () {
+                                getVideo(ImageSource.camera);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.camera),
+                              title: Text('Gallary'),
+                              onTap: () {
+                                getVideo(ImageSource.gallery);
+                              },
+                            ),
+                            ListTile(
+                              leading: Icon(Icons.close),
+                              title: Text('Cancel'),
+                              onTap: () => Navigator.of(context).pop(),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   },

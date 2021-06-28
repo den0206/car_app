@@ -3,6 +3,7 @@ import 'package:car_app/src/data/consts_color.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/screen/feed/feed_screen.dart';
 import 'package:car_app/src/screen/upload/upload_screen.dart';
+import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,7 @@ class BottomBarScreen extends StatelessWidget {
     List<Widget> _pages = [
       FeedScreen(),
       UploadScreen(),
-      Text("User"),
+      UsersScreen(),
     ];
 
     return Scaffold(

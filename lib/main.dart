@@ -1,9 +1,9 @@
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
-import 'package:car_app/src/screen/bottom_tab.dart';
+import 'package:car_app/src/screen/common/bottom_tab.dart';
 import 'package:car_app/src/screen/feed/favorite_screen.dart';
-import 'package:car_app/src/screen/network_branch.dart';
+import 'package:car_app/src/screen/common/network_branch.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

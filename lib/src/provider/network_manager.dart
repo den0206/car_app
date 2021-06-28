@@ -10,7 +10,6 @@ class NetworkManager {
 
   NetworkManager() {
     Connectivity().onConnectivityChanged.listen((status) {
-      print(status);
       networkStatusController.add(_getNetworkStatus(status));
     });
   }

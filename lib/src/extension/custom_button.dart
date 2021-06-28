@@ -74,7 +74,7 @@ class CustomGradientButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return TextButton(
       style: ElevatedButton.styleFrom(
           primary: Colors.transparent,
           padding: EdgeInsets.zero,

@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
-import '../bottom_tab.dart';
+import '../common/bottom_tab.dart';
 import 'custom_textfields.dart';
 
 class ConfirmScreenModel with ChangeNotifier {
