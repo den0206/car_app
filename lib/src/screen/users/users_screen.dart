@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -70,9 +69,9 @@ class UserCell extends StatelessWidget {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: CachedNetworkImage(
-              imageUrl: user.imageUrl,
-              // fit: BoxFit.cover,
+            child: Image.network(
+              "https://picsum.photos/200/300/?random",
+              fit: BoxFit.cover,
             ),
           ),
         ),
