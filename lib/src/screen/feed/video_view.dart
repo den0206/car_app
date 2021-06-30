@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:car_app/src/screen/users/user_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -273,51 +274,42 @@ class _AnimationProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 60,
-      height: 60,
-      child: Column(
-        children: [
-          Container(
-            padding: EdgeInsets.all(4),
-            height: 50,
-            width: 50,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
-              gradient: LinearGradient(
-                  colors: [Colors.grey[800]!, Colors.grey[700]!]),
-            ),
-            child: ClipRRect(
+    return GestureDetector(
+      child: Container(
+        width: 60,
+        height: 60,
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(4),
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
-                child: CachedNetworkImage(
-                  imageUrl: user.imageUrl,
-                  placeholder: (context, url) => Icon(Icons.person),
-                )
-
-                // Icon(Icons.person),
+                gradient: LinearGradient(
+                    colors: [Colors.grey[800]!, Colors.grey[700]!]),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(25),
+                child: Hero(
+                  tag: "image${user.imageUrl}",
+                  child: CachedNetworkImage(
+                    imageUrl: user.imageUrl,
+                    placeholder: (context, url) => Icon(Icons.person),
+                  ),
                 ),
-          )
-        ],
+              ),
+            )
+          ],
+        ),
       ),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          UserDetailScreen.routeName,
+          arguments: user,
+        );
+      },
     );
   }
 }
-
-// AnimatedOpacity(
-//       opacity: video.isFavorite ? 1.0 : 0.0,
-//       duration: Duration(milliseconds: 300),
-//       onEnd: () {
-//         context.read<VideoManager>().dismissAnimation(video);
-//       },
-//       curve: Curves.easeInBack,
-//       child: Visibility(
-//         visible: video.isVisble,
-//         child: Center(
-//           child: Icon(
-//             Icons.favorite,
-//             size: 150.0,
-//             color: Colors.red,
-//           ),
-//         ),
-//       ),
-//     )

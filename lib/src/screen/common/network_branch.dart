@@ -14,7 +14,7 @@ class NetworkBranch extends StatefulWidget {
 }
 
 class _NetworkBranchState extends State<NetworkBranch> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
+  ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<ConnectivityResult> _connectivitySubscription;
 

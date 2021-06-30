@@ -12,10 +12,10 @@ class UploadScreen extends StatelessWidget {
   UploadScreen({Key? key}) : super(key: key);
 
   List<String> images = [
-    'https://media.istockphoto.com/photos/man-at-the-shopping-picture-id868718238?k=6&m=868718238&s=612x612&w=0&h=ZUPCx8Us3fGhnSOlecWIZ68y3H4rCiTnANtnjHk0bvo=',
-    'https://thumbor.forbes.com/thumbor/fit-in/1200x0/filters%3Aformat%28jpg%29/https%3A%2F%2Fspecials-images.forbesimg.com%2Fdam%2Fimageserve%2F1138257321%2F0x0.jpg%3Ffit%3Dscale',
-    'https://e-shopy.org/wp-content/uploads/2020/08/shop.jpeg',
-    'https://e-shopy.org/wp-content/uploads/2020/08/shop.jpeg',
+    "https://picsum.photos/200/300?grayscale",
+    "https://picsum.photos/200/300/?blur",
+    "https://picsum.photos/200/300?grayscale",
+    "https://picsum.photos/200/300?grayscale",
   ];
 
   @override
@@ -56,8 +56,8 @@ class UploadScreen extends StatelessWidget {
                           end: Alignment.bottomRight,
                           colors: [Colors.grey, Colors.white.withOpacity(0.0)],
                           stops: [
-                            0.1,
-                            0.7,
+                            0.3,
+                            0.9,
                           ],
                         ),
                       ),

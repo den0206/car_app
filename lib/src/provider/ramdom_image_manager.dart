@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 class CarouselListModel with ChangeNotifier {
   List<CarouselObject> objects = [];
   int currentPage = 2;
+  int perPage = 10;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -15,9 +16,16 @@ class CarouselListModel with ChangeNotifier {
     notifyListeners();
   }
 
+  bool _showIndicator = true;
+  bool get showIndicator => _showIndicator;
+  void setIndicator(bool value) {
+    _showIndicator = value;
+    notifyListeners();
+  }
+
   fetchFirstObjects() async {
     if (objects.isEmpty) {
-      final jsonData = await _getResponse(currentPage: 2);
+      final jsonData = await _getResponse();
 
       for (Map<String, dynamic> json in jsonData) {
         final obj = CarouselObject.fromJson(json);
@@ -33,7 +41,7 @@ class CarouselListModel with ChangeNotifier {
 
     try {
       print("pagination");
-      final jsonData = await _getResponse(currentPage: currentPage);
+      final jsonData = await _getResponse();
 
       for (Map<String, dynamic> json in jsonData) {
         final obj = CarouselObject.fromJson(json);
@@ -49,9 +57,9 @@ class CarouselListModel with ChangeNotifier {
     }
   }
 
-  Future<dynamic> _getResponse({required int currentPage}) async {
+  Future<dynamic> _getResponse() async {
     final dataFromUrl =
-        "https://picsum.photos/v2/list?page=$currentPage&limit=10";
+        "https://picsum.photos/v2/list?page=$currentPage&limit=$perPage";
 
     final uri = Uri.parse(dataFromUrl);
     final response = await http.get(uri);

@@ -42,7 +42,7 @@ class FavoritsScreen extends StatelessWidget {
                 (BuildContext context, int index) {
                   final video = model.favVideos[index];
 
-                  return _VideoCell(video: video);
+                  return VideoCell(video: video);
                 },
                 childCount: model.favVideos.length,
               ),
@@ -54,8 +54,8 @@ class FavoritsScreen extends StatelessWidget {
   }
 }
 
-class _VideoCell extends StatelessWidget {
-  const _VideoCell({
+class VideoCell extends StatelessWidget {
+  const VideoCell({
     Key? key,
     required this.video,
   }) : super(key: key);
@@ -67,36 +67,42 @@ class _VideoCell extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkResponse(
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: video.thumbUrl != null
-              ? CachedNetworkImage(
-                  imageUrl: video.thumbUrl!,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => SizedBox(
-                      height: 50, width: 50, child: PlainLoadingWidget()),
-                  errorWidget: (context, url, error) => Center(
-                      child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        Icons.error,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Can't Read",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
-                  )),
-                )
-              : Image.memory(
-                  video.thumbnail!,
-                  fit: BoxFit.cover,
-                ),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.white),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: video.thumbUrl != null
+                ? CachedNetworkImage(
+                    imageUrl: video.thumbUrl!,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => SizedBox(
+                        height: 50, width: 50, child: PlainLoadingWidget()),
+                    errorWidget: (context, url, error) => Center(
+                        child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.error,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Can't Read",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    )),
+                  )
+                : Image.memory(
+                    video.thumbnail!,
+                    fit: BoxFit.cover,
+                  ),
+          ),
         ),
       ),
     );

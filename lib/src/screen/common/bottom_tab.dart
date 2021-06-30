@@ -75,8 +75,8 @@ class BottomBarScreen extends StatelessWidget {
                 label: "Upload",
               ),
               BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.person_3_fill),
-                label: "Users",
+                icon: Icon(Icons.recent_actors),
+                label: "Carousel",
               ),
             ],
           ),

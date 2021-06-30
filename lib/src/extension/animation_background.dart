@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:car_app/src/extension/overlay_loading_widget.dart';
 import 'package:flutter/material.dart';
 
 class AnimationBackground extends StatefulWidget {
@@ -61,6 +62,7 @@ class _AnimationBackgroundState extends State<AnimationBackground>
       height: double.infinity,
       width: double.infinity,
       alignment: FractionalOffset(_animation!.value, 0),
+      placeholder: (context, url) => PlainLoadingWidget(),
     );
   }
 }

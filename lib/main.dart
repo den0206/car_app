@@ -1,10 +1,13 @@
+import 'package:car_app/src/model/user.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/common/bottom_tab.dart';
 import 'package:car_app/src/screen/feed/favorite_screen.dart';
 import 'package:car_app/src/screen/common/network_branch.dart';
+import 'package:car_app/src/screen/users/user_detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -39,9 +42,20 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Colors.black,
             appBarTheme: AppBarTheme(
               backgroundColor: Colors.grey,
+              brightness: Brightness.dark,
             )),
         routes: {
           FavoritsScreen.routeName: (context) => FavoritsScreen(),
+        },
+
+        /// with arguments
+        onGenerateRoute: (settings) {
+          if (settings.name == UserDetailScreen.routeName) {
+            final user = settings.arguments as User;
+            return MaterialPageRoute(
+              builder: (context) => UserDetailScreen(user: user),
+            );
+          }
         },
         home: NetworkBranch(),
       ),

@@ -117,18 +117,25 @@ class CustomGradientButton extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class BackButtonWithStack extends StatelessWidget {
-  const BackButtonWithStack({
+  BackButtonWithStack({
     Key? key,
     required this.child,
-    required this.onPop,
+    this.onPop,
+    this.title,
   }) : super(key: key);
 
   final Widget child;
-  final Function() onPop;
+  Function()? onPop;
+  String? title;
 
   @override
   Widget build(BuildContext context) {
+    dismiss() {
+      Navigator.of(context).pop();
+    }
+
     return Stack(
       children: [
         child,
@@ -137,16 +144,42 @@ class BackButtonWithStack extends StatelessWidget {
           left: 0.0,
           right: 0.0,
           child: AppBar(
-            title: null, // You can add title here
+            title:
+                title != null ? Text(title!) : null, // You can add title here
             leading: new IconButton(
               icon: new Icon(Icons.arrow_back_ios, color: Colors.white),
-              onPressed: onPop,
+              onPressed: onPop ?? dismiss,
             ),
             backgroundColor: Colors.transparent, //You can make this transparent
             elevation: 0.0, //No shadow
           ),
         ),
       ],
+    );
+  }
+}
+
+class ImageButton extends StatelessWidget {
+  const ImageButton({
+    Key? key,
+    required this.imagePath,
+    required this.onTap,
+  }) : super(key: key);
+
+  final String imagePath;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
+        child: Image.asset(
+          imagePath,
+          width: 40,
+        ),
+      ),
     );
   }
 }
