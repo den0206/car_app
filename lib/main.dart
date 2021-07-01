@@ -6,11 +6,19 @@ import 'package:car_app/src/screen/common/bottom_tab.dart';
 import 'package:car_app/src/screen/feed/favorite_screen.dart';
 import 'package:car_app/src/screen/common/network_branch.dart';
 import 'package:car_app/src/screen/users/user_detail_screen.dart';
+import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarBrightness: Brightness.dark, //status bar brigtness
+    statusBarIconBrightness: Brightness.dark, //status barIcon Brightness
+    systemNavigationBarDividerColor:
+        Colors.greenAccent, //Navigation bar divider color
+    systemNavigationBarIconBrightness: Brightness.light, //navigation bar icon
+  ));
   runApp(MyApp());
 }
 
@@ -45,6 +53,7 @@ class MyApp extends StatelessWidget {
               brightness: Brightness.dark,
             )),
         routes: {
+          UsersScreen.routeName: (context) => UsersScreen(),
           FavoritsScreen.routeName: (context) => FavoritsScreen(),
         },
 

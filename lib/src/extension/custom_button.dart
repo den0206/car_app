@@ -160,24 +160,26 @@ class BackButtonWithStack extends StatelessWidget {
 }
 
 class ImageButton extends StatelessWidget {
-  const ImageButton({
-    Key? key,
-    required this.imagePath,
-    required this.onTap,
-  }) : super(key: key);
+  const ImageButton(
+      {Key? key, required this.imagePath, required this.onTap, this.width = 40})
+      : super(key: key);
 
   final String imagePath;
   final VoidCallback onTap;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTap,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(10),
-        child: Image.asset(
-          imagePath,
-          width: 40,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 4),
+      child: InkWell(
+        onTap: onTap,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Image.asset(
+            imagePath,
+            width: width,
+          ),
         ),
       ),
     );

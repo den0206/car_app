@@ -1,6 +1,8 @@
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_app/src/screen/users/user_detail_screen.dart';
+import 'package:car_app/src/screen/users/users_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -123,15 +125,6 @@ class VideoOverlayView extends StatelessWidget {
                         video.title,
                         style: TextStyle(color: Colors.white),
                       ),
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.music_note,
-                            size: 15,
-                            color: Colors.white,
-                          ),
-                        ],
-                      )
                     ],
                   ),
                 ),
@@ -180,6 +173,18 @@ class VideoOverlayView extends StatelessWidget {
                         ),
                       );
                     }),
+
+                    _VideoIconButton(
+                      text: "Users",
+                      icon: Icon(
+                        CupertinoIcons.person_3_fill,
+                        size: 45,
+                        color: Colors.green,
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, UsersScreen.routeName);
+                      },
+                    ),
                     CirculeAnimation(
                       _AnimationProfile(user: user),
                     ),
@@ -209,6 +214,7 @@ class _VideoIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         IconButton(
           icon: icon,
