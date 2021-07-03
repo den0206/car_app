@@ -15,7 +15,7 @@ class FeedScreen extends StatelessWidget {
           children: [
             PageView.builder(
               itemCount: model.videos.length,
-              // allowImplicitScrolling: true,
+              allowImplicitScrolling: true,
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 /// exxample

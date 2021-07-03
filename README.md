@@ -1,5 +1,23 @@
+
+
+# 動作イメージ
+
+|Card Carousel|自作 Carousel|
+|---|---|
+|![動作イメージ](readme_gif/screen-3.gif)|![動作イメージ](readme_gif/screen-2.gif)|
+
+<br>
+
+|動画投稿UI|Tap Animation|
+|---|---|
+|![動作イメージ](readme_gif/screen-4.gif)|![動作イメージ](readme_gif/screen-1.gif)|
+<br>
+
+
 # ディレクトリ構成(lib)
-```console
+
+
+``` directory
 ├── main.dart
 └── src
     ├── data
@@ -45,3 +63,62 @@
             └── users_screen.dart
         
 ```
+
+
+## pub.dev
+
+``` yaml
+# null-safety
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  badges: ^2.0.1
+  cached_network_image: ^3.0.0
+  connectivity_plus: ^1.0.4
+  cupertino_icons: ^1.0.3
+  image_picker: ^0.8.0+4
+  provider: ^5.0.0
+  video_player: ^2.1.6
+  video_thumbnail: ^0.3.3
+  
+```
+
+
+## API(使用目的)
+---
+
+## [RANDOM User Generator (JSON)](https://randomuser.me/)
+
+>User Modelを作成。実際のUI/UXに近しい環境を再現。
+
+
+## [Lorem Picsum  ssssss(JSON)](https://picsum.photos/)
+
+>可能な限りネットワークを経由しての画像描写再現の為。
+
+
+<br>
+
+
+### **参考URL**
+---
+https://flutter.dev/docs/development/ui/animations/hero-animations
+
+https://flutter.dev/docs/cookbook/animation/opacity-animation
+
+https://stackoverflow.com/questions/53727361/how-to-change-speed-of-a-hero-animation-in-flutter
+
+https://medium.com/swlh/flutters-ux-bouncing-animation-1424fdbdd325  等...
+
+### **動作環境**
+___
+
+- vscode : 1.57.1 
+- dart :  2.13.3
+- flutter : 2.2 (null-safety)
+
+
+
