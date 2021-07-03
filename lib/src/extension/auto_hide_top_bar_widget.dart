@@ -97,6 +97,7 @@ class _FadeOnScrollState extends State<FadeOnScroll> {
   @override
   initState() {
     super.initState();
+
     _offset = widget.scrollController.offset;
     widget.scrollController.addListener(_setOffset);
   }

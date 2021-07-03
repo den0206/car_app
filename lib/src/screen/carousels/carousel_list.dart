@@ -37,6 +37,9 @@ class CarouselList extends StatelessWidget {
             body: FutureBuilder(
               future: model.fetchFirstObjects(),
               builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting &&
+                    model.objects.isEmpty) return PlainLoadingWidget();
+
                 return Column(
                   children: [
                     Spacer(),

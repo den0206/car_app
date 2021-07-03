@@ -22,24 +22,18 @@ class InlineScreen extends StatelessWidget {
               },
               child: Stack(
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: video.thumbUrl!,
-                    fit: BoxFit.cover,
-                  ),
+                  video.thumbUrl != null
+                      ? CachedNetworkImage(
+                          imageUrl: video.thumbUrl!,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.memory(
+                          video.thumbnail!,
+                          fit: BoxFit.cover,
+                        ),
                   Container(
                     width: double.infinity,
                     height: 200,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.rectangle,
-                      gradient: LinearGradient(
-                        begin: FractionalOffset.topCenter,
-                        end: FractionalOffset.center,
-                        colors: [
-                          Color.fromARGB(51, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0),
-                        ],
-                      ),
-                    ),
                   ),
                   Align(
                     alignment: Alignment.topLeft,
@@ -47,7 +41,7 @@ class InlineScreen extends StatelessWidget {
                       video.title,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 24,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(

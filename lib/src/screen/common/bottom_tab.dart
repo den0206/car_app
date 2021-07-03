@@ -85,8 +85,8 @@ class BottomBarScreen extends StatelessWidget {
                 label: "Upload",
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.all_inclusive_outlined),
-                label: "3D",
+                icon: Icon(Icons.video_collection_outlined),
+                label: "Inline",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.recent_actors),
@@ -112,8 +112,9 @@ class BottomBarScreen extends StatelessWidget {
             width: 60,
             height: 60,
             child: Icon(
-              Icons.add,
-              size: 40,
+              Icons.video_call_outlined,
+              color: Colors.white.withOpacity(0.6),
+              size: 30,
             ),
             decoration: BoxDecoration(
                 shape: BoxShape.circle,

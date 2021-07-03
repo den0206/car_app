@@ -71,6 +71,7 @@ class MyApp extends StatelessWidget {
           if (settings.name == InlineDetailScreen.routeName) {
             final video = settings.arguments as Video;
             return MaterialPageRoute(
+              fullscreenDialog: true,
               builder: (context) => InlineDetailScreen(video: video),
             );
           }

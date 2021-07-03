@@ -3,6 +3,7 @@ import 'package:car_app/src/extension/auto_hide_top_bar_widget.dart';
 import 'package:car_app/src/extension/overlay_loading_widget.dart';
 import 'package:car_app/src/model/video.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
+import 'package:car_app/src/screen/inline/inline_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +68,10 @@ class VideoCell extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkResponse(
+        onTap: () {
+          Navigator.pushNamed(context, InlineDetailScreen.routeName,
+              arguments: video);
+        },
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.white),

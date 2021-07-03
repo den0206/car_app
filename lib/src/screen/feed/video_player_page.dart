@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
@@ -8,11 +9,11 @@ class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage({
     Key? key,
     required this.video,
-    this.height = double.infinity,
+    this.showThumbnail = false,
   }) : super(key: key);
 
   final Video video;
-  final double height;
+  final bool showThumbnail;
 
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
@@ -62,20 +63,20 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: !isLoading
-          ? GestureDetector(
-              onTap: () {
-                setState(() {
-                  if (controller.value.isPlaying) {
-                    controller.pause();
-                  } else {
-                    controller.play();
-                  }
-                });
-              },
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: widget.height,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        child: !isLoading
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    if (controller.value.isPlaying) {
+                      controller.pause();
+                    } else {
+                      controller.play();
+                    }
+                  });
+                },
                 child: Stack(
                   children: [
                     VideoPlayer(controller),
@@ -99,9 +100,20 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                     ),
                   ],
                 ),
-              ),
-            )
-          : PlainLoadingWidget(),
+              )
+            : Center(
+                child: widget.showThumbnail
+                    ? widget.video.thumbUrl != null
+                        ? CachedNetworkImage(
+                            imageUrl: widget.video.thumbUrl!,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.memory(
+                            widget.video.thumbnail!,
+                            fit: BoxFit.cover,
+                          )
+                    : PlainLoadingWidget()),
+      ),
     );
   }
 }
