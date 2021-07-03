@@ -10,10 +10,12 @@ class VideoPlayerPage extends StatefulWidget {
     Key? key,
     required this.video,
     this.showThumbnail = false,
+    this.isPlaying = true,
   }) : super(key: key);
 
   final Video video;
   final bool showThumbnail;
+  final bool isPlaying;
 
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
@@ -31,7 +33,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     if (widget.video.videoFile != null) {
       controller = VideoPlayerController.file(widget.video.videoFile!)
         ..initialize().then((value) {
-          controller.play();
+          if (widget.isPlaying) {
+            controller.play();
+          }
+
           controller.setVolume(1);
           controller.setLooping(true);
           setState(() {
@@ -43,7 +48,10 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
 
       controller = VideoPlayerController.network(videoUrl!)
         ..initialize().then((value) {
-          controller.play();
+          if (widget.isPlaying) {
+            controller.play();
+          }
+
           controller.setVolume(1);
           controller.setLooping(true);
 

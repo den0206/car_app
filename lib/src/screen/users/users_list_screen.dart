@@ -27,7 +27,7 @@ class UsersListScreen extends StatelessWidget {
   Center _loadingView() {
     return new Center(
       child: new Container(
-        margin: EdgeInsets.only(top: 8.0),
+        margin: EdgeInsets.only(top: 18.0),
         width: 32.0,
         height: 32.0,
         child: CircularProgressIndicator(

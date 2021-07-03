@@ -43,17 +43,16 @@ class CarouselList extends StatelessWidget {
                 return Column(
                   children: [
                     Spacer(),
-                    Column(
-                      children: [
-                        if (model.isLoading)
-                          Text(
-                            "Loading...",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        OriginCarousel(
-                          model: model,
-                        ),
-                      ],
+                    AnimatedOpacity(
+                      duration: Duration(milliseconds: 500),
+                      opacity: model.isLoading ? 1.0 : 0.0,
+                      child: Text(
+                        "Loading...",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    OriginCarousel(
+                      model: model,
                     ),
                     Spacer(),
                   ],
@@ -117,15 +116,20 @@ class _OriginCarouselState extends State<OriginCarousel> {
             },
           ),
         ),
-        if (widget.model.showIndicator)
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(10, (i) => i).map(
-                (i) {
-                  // var index = widget.model.objects.indexOf(obj);
-                  return Container(
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.03,
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 5),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(10, (i) => i).map(
+              (i) {
+                // var index = widget.model.objects.indexOf(obj);
+                return AnimatedOpacity(
+                  duration: Duration(milliseconds: 500),
+                  opacity: widget.model.showIndicator ? 1.0 : 0.0,
+                  child: Container(
                     width: 7,
                     height: 7,
                     margin: EdgeInsets.symmetric(horizontal: 6),
@@ -134,11 +138,12 @@ class _OriginCarouselState extends State<OriginCarousel> {
                       color:
                           currentPage % 10 == i ? Colors.black : Colors.white,
                     ),
-                  );
-                },
-              ).toList(),
-            ),
-          )
+                  ),
+                );
+              },
+            ).toList(),
+          ),
+        ),
       ],
     );
   }
@@ -161,7 +166,7 @@ class CarouselCard extends StatelessWidget {
           padding: EdgeInsets.only(top: 32, left: 8, right: 8),
           child: Container(
             width: responsive.width * 0.7,
-            height: responsive.height * 0.5,
+            height: responsive.height * 0.55,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
               color: Colors.grey,

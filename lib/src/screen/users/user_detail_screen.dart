@@ -48,7 +48,7 @@ class UserDetailScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 8),
                   child: Container(
-                    padding: EdgeInsets.only(top: responsiveSize.height * 0.15),
+                    padding: EdgeInsets.only(top: responsiveSize.width * 0.3),
                     child: Card(
                       elevation: 5.0,
                       color: Colors.transparent,
@@ -123,7 +123,7 @@ class UserDetailScreen extends StatelessWidget {
                         tag: "image${user.imageUrl}",
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
-                          radius: 100.0,
+                          radius: responsiveSize.width * 0.25,
                           backgroundImage: NetworkImage(user.imageUrl),
                         ),
                       ),
@@ -137,6 +137,7 @@ class UserDetailScreen extends StatelessWidget {
             ),
             Consumer<VideoManager>(builder: (_, model, __) {
               return Container(
+                padding: EdgeInsets.all(4),
                 child: GridView.builder(
                   shrinkWrap: true,
                   itemCount: Random().nextInt(model.videos.length - 1),

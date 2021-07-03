@@ -79,8 +79,9 @@ class _UsersCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final res = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      padding: EdgeInsets.symmetric(vertical: 3, horizontal: 20),
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, UserDetailScreen.routeName,
@@ -99,24 +100,25 @@ class _UsersCard extends StatelessWidget {
                 ),
               ],
             ),
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+            margin: EdgeInsets.all(res.width * 0.01),
+            padding: EdgeInsets.symmetric(
+                horizontal: res.width * 0.02, vertical: res.height * 0.01),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Hero(
                       tag: "image${user.imageUrl}",
                       child: SizedBox(
-                        width: 100,
-                        height: 100,
+                        width: res.width * 0.2,
+                        height: res.width * 0.2,
                         child: ClipOval(
                           child: Image.network(user.imageUrl),
                         ),
                       ),
                     ),
-                    Spacer(),
                     Flexible(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -143,8 +145,10 @@ class _UsersCard extends StatelessWidget {
                 ),
                 Flexible(
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      Spacer(),
                       Text(
                         user.fullname,
                         textAlign: TextAlign.end,
