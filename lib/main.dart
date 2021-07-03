@@ -1,10 +1,12 @@
 import 'package:car_app/src/model/user.dart';
+import 'package:car_app/src/model/video.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/common/bottom_tab.dart';
 import 'package:car_app/src/screen/feed/favorite_screen.dart';
 import 'package:car_app/src/screen/common/network_branch.dart';
+import 'package:car_app/src/screen/inline/inline_detail_screen.dart';
 import 'package:car_app/src/screen/users/user_detail_screen.dart';
 import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +65,13 @@ class MyApp extends StatelessWidget {
             final user = settings.arguments as User;
             return MaterialPageRoute(
               builder: (context) => UserDetailScreen(user: user),
+            );
+          }
+
+          if (settings.name == InlineDetailScreen.routeName) {
+            final video = settings.arguments as Video;
+            return MaterialPageRoute(
+              builder: (context) => InlineDetailScreen(video: video),
             );
           }
         },

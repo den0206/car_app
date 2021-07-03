@@ -1,7 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:car_app/src/screen/users/user_detail_screen.dart';
-import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -174,17 +173,6 @@ class VideoOverlayView extends StatelessWidget {
                       );
                     }),
 
-                    _VideoIconButton(
-                      text: "Users",
-                      icon: Icon(
-                        CupertinoIcons.person_3_fill,
-                        size: 45,
-                        color: Colors.green,
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, UsersScreen.routeName);
-                      },
-                    ),
                     CirculeAnimation(
                       _AnimationProfile(user: user),
                     ),

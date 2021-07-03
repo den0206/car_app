@@ -16,6 +16,7 @@ class UsersCardScreen extends StatefulWidget {
 class _UsersCardScreenState extends State<UsersCardScreen> {
   final PageController _pageController =
       PageController(viewportFraction: 0.3, initialPage: 1);
+
   @override
   Widget build(BuildContext context) {
     final usersModel = context.watch<RandomUserManager>();
@@ -23,7 +24,7 @@ class _UsersCardScreenState extends State<UsersCardScreen> {
     return PageView.builder(
       scrollDirection: Axis.vertical,
       controller: _pageController,
-      itemCount: 10,
+      itemCount: usersModel.users.length,
       itemBuilder: (context, index) {
         return _animatedCard(index, usersModel.users[index]);
       },
@@ -98,7 +99,7 @@ class _UsersCard extends StatelessWidget {
                 ),
               ],
             ),
-            margin: EdgeInsets.all(16),
+            margin: EdgeInsets.all(10),
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,25 +117,27 @@ class _UsersCard extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ImageButton(
-                          imagePath: "assets/images/facebook_logo.png",
-                          onTap: () {},
-                          width: 30,
-                        ),
-                        ImageButton(
-                          imagePath: "assets/images/linkedin_logo.png",
-                          onTap: () {},
-                          width: 30,
-                        ),
-                        ImageButton(
-                          imagePath: "assets/images/instagram_logo.png",
-                          onTap: () {},
-                          width: 30,
-                        ),
-                      ],
+                    Flexible(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          ImageButton(
+                            imagePath: "assets/images/facebook_logo.png",
+                            onTap: () {},
+                            width: 30,
+                          ),
+                          ImageButton(
+                            imagePath: "assets/images/linkedin_logo.png",
+                            onTap: () {},
+                            width: 30,
+                          ),
+                          ImageButton(
+                            imagePath: "assets/images/instagram_logo.png",
+                            onTap: () {},
+                            width: 30,
+                          ),
+                        ],
+                      ),
                     )
                   ],
                 ),

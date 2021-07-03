@@ -3,7 +3,9 @@ import 'package:car_app/src/data/consts_color.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
 import 'package:car_app/src/screen/carousels/carousel_list.dart';
 import 'package:car_app/src/screen/feed/feed_screen.dart';
+import 'package:car_app/src/screen/inline/inline_screen.dart';
 import 'package:car_app/src/screen/upload/upload_screen.dart';
+import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +29,9 @@ class BottomBarScreen extends StatelessWidget {
 
     List<Widget> _pages = [
       FeedScreen(),
+      UsersScreen(),
       UploadScreen(),
+      InlineScreen(),
       CarouselList(),
     ];
 
@@ -70,9 +74,19 @@ class BottomBarScreen extends StatelessWidget {
                 label: "Feeds",
               ),
               BottomNavigationBarItem(
+                icon: Icon(
+                  CupertinoIcons.person_3_fill,
+                ),
+                label: "Users",
+              ),
+              BottomNavigationBarItem(
                 activeIcon: null,
                 icon: Icon(null),
                 label: "Upload",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.all_inclusive_outlined),
+                label: "3D",
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.recent_actors),
@@ -88,10 +102,11 @@ class BottomBarScreen extends StatelessWidget {
         padding: EdgeInsets.all(3),
         child: FloatingActionButton(
           backgroundColor: Colors.transparent,
+          elevation: 10,
           hoverElevation: 10,
           splashColor: Colors.grey,
           onPressed: () {
-            model.setIndex(1);
+            model.setIndex(2);
           },
           child: Container(
             width: 60,

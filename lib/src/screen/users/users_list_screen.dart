@@ -14,12 +14,26 @@ class UsersListScreen extends StatelessWidget {
     return ListView.builder(
       itemCount: userModel.users.length,
       itemBuilder: (context, index) {
-        final user = userModel.users[index];
         if (index == userModel.users.length - 1) {
-          print("Pagination");
+          userModel.fetchMoreUser();
+          return _loadingView();
         }
-        return _UserCell(user: user);
+
+        return _UserCell(user: userModel.users[index]);
       },
+    );
+  }
+
+  Center _loadingView() {
+    return new Center(
+      child: new Container(
+        margin: EdgeInsets.only(top: 8.0),
+        width: 32.0,
+        height: 32.0,
+        child: CircularProgressIndicator(
+          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
+        ),
+      ),
     );
   }
 }

@@ -38,6 +38,7 @@ class UploadScreen extends StatelessWidget {
     }
 
     return Scaffold(
+      backgroundColor: Colors.grey,
       body: Stack(
         children: [
           AnimationBackground(images: images),

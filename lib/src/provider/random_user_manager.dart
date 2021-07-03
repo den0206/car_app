@@ -10,22 +10,24 @@ class RandomUserManager with ChangeNotifier {
   List<User> users = [];
   int currentPage = 0;
 
-  fetchRandomUsers() async {
-    if (users.length == 0) {
-      final jsonData = await _getResponse(perPage: 20);
-
-      for (Map<String, dynamic> json in jsonData[UserKey.results]) {
-        final randomUser = User.fromJson(json);
-        users.add(randomUser);
-      }
-
+  fetchFirstUsers() async {
+    if (users.isEmpty) {
+      await _parseUser();
       currentPage++;
-
-      notifyListeners();
     }
   }
 
-  Future<dynamic> _getResponse({int perPage = 10}) async {
+  fetchMoreUser() async {
+    try {
+      await _parseUser();
+      currentPage++;
+      notifyListeners();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  _parseUser({int perPage = 10}) async {
     final dataFromUrl =
         "https://randomuser.me/api/?page=$currentPage&results=$perPage";
     final uri = Uri.parse(dataFromUrl);
@@ -35,6 +37,9 @@ class RandomUserManager with ChangeNotifier {
       return;
     }
     final jsonData = json.decode(response.body);
-    return jsonData;
+    for (Map<String, dynamic> json in jsonData[UserKey.results]) {
+      final randomUser = User.fromJson(json);
+      users.add(randomUser);
+    }
   }
 }

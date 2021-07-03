@@ -10,37 +10,20 @@ class Root extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: context.watch<RandomUserManager>().fetchRandomUsers(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return PlainLoadingWidget();
-        }
-        if (snapshot.error != null) {
-          showErrorAlert(context, snapshot.error);
-        }
+    return Consumer<RandomUserManager>(builder: (_, model, __) {
+      return FutureBuilder(
+        future: model.users.isEmpty ? model.fetchFirstUsers() : null,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return PlainLoadingWidget();
+          }
+          if (snapshot.error != null) {
+            showErrorAlert(context, snapshot.error);
+          }
 
-        return BottomBarScreen();
-      },
-    );
+          return BottomBarScreen();
+        },
+      );
+    });
   }
 }
-
-// if (networkStatus == NetworkStatus.Online) {
-//     return FutureBuilder(
-//       future: context.watch<RandomUserManager>().fetchRandomUsers(),
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return PlainLoadingWidget();
-//         }
-//         if (snapshot.error != null) {
-//           showErrorAlert(context, snapshot.error);
-//         }
-
-//         return BottomBarScreen();
-//       },
-//     );
-//   } else {
-//     return Center(child: Text("No Internet"));
-//   }
-// }

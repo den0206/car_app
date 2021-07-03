@@ -1,15 +1,18 @@
-import 'package:car_app/src/extension/overlay_loading_widget.dart';
-import 'package:car_app/src/model/video.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+
+import 'package:car_app/src/extension/overlay_loading_widget.dart';
+import 'package:car_app/src/model/video.dart';
 
 class VideoPlayerPage extends StatefulWidget {
   VideoPlayerPage({
     Key? key,
     required this.video,
+    this.height = double.infinity,
   }) : super(key: key);
 
   final Video video;
+  final double height;
 
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
@@ -70,28 +73,32 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
                   }
                 });
               },
-              child: Stack(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: VideoPlayer(controller),
-                  ),
-                  // if (!controller.value.isPlaying)
-                  AnimatedOpacity(
-                    opacity: !controller.value.isPlaying ? 1.0 : 0.0,
-                    duration: Duration(milliseconds: 500),
-                    child: Center(
-                      child: Icon(
-                        controller.value.isPlaying
-                            ? Icons.pause
-                            : Icons.play_arrow,
-                        size: 100.0,
-                        color: Colors.white,
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: widget.height,
+                child: Stack(
+                  children: [
+                    VideoPlayer(controller),
+                    AnimatedOpacity(
+                      opacity: !controller.value.isPlaying ? 1.0 : 0.0,
+                      duration: Duration(milliseconds: 500),
+                      child: Container(
+                        color: !controller.value.isPlaying
+                            ? Color.fromRGBO(0, 0, 0, 0.3)
+                            : Colors.transparent,
+                        child: Center(
+                          child: Icon(
+                            controller.value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
+                            size: 100.0,
+                            color: Colors.white,
+                          ),
+                        ),
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
             )
           : PlainLoadingWidget(),
