@@ -95,7 +95,7 @@ dependencies:
 >User Modelを作成。実際のUI/UXに近しい環境を再現。
 
 
-## [Lorem Picsum  ssssss(JSON)](https://picsum.photos/)
+## [Lorem Picsum (JSON)](https://picsum.photos/)
 
 >可能な限りネットワークを経由しての画像描写再現の為。
 

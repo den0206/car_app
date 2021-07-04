@@ -107,7 +107,8 @@ class _OriginCarouselState extends State<OriginCarousel> {
               }
             },
             itemBuilder: (context, index) {
-              return Opacity(
+              return AnimatedOpacity(
+                duration: Duration(milliseconds: 500),
                 opacity: currentPage == index ? 1.0 : 0.65,
                 child: CarouselCard(
                   object: widget.model.objects[index],
@@ -123,7 +124,11 @@ class _OriginCarouselState extends State<OriginCarousel> {
           padding: EdgeInsets.symmetric(vertical: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: List.generate(10, (i) => i).map(
+            children: List.generate(
+                widget.model.objects.length < 10
+                    ? widget.model.objects.length
+                    : 10,
+                (i) => i).map(
               (i) {
                 // var index = widget.model.objects.indexOf(obj);
                 return AnimatedOpacity(

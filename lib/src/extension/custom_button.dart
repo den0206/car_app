@@ -122,11 +122,14 @@ class BackButtonWithStack extends StatelessWidget {
   BackButtonWithStack({
     Key? key,
     required this.child,
+    this.top,
     this.onPop,
     this.title,
   }) : super(key: key);
 
   final Widget child;
+
+  double? top;
   Function()? onPop;
   String? title;
 
@@ -140,7 +143,7 @@ class BackButtonWithStack extends StatelessWidget {
       children: [
         child,
         Positioned(
-          top: 0.0,
+          top: top ?? 0.0,
           left: 0.0,
           right: 0.0,
           child: AppBar(

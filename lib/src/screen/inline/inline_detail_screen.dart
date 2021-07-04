@@ -27,100 +27,105 @@ class InlineDetailScreen extends StatelessWidget {
     final randomUser = context.read<RandomUserManager>().users[userIndex];
 
     return Scaffold(
-      body: BackButtonWithStack(
-        child: Stack(
-          children: [
-            Column(
-              children: [
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.45,
-                  child: VideoPlayerPage(
-                    video: video,
-                    showThumbnail: true,
+      body: SafeArea(
+        child: BackButtonWithStack(
+          /// use fullscreen mode
+          top: 30,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.45,
+                    child: VideoPlayerPage(
+                      video: video,
+                      isPlaying: true,
+                      isInline: true,
+                    ),
                   ),
-                ),
-                Divider(
-                  color: Colors.grey,
-                  height: 3,
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: NetworkImage(randomUser.imageUrl),
-                        backgroundColor: Colors.grey,
-                      ),
-                      Spacer(),
-                      Column(
-                        children: [
-                          IconButton(
-                            padding: EdgeInsets.zero,
-                            onPressed: () {
-                              model.manageFavorite(video);
-                            },
-                            icon: Icon(
-                              Icons.favorite,
-                              color:
-                                  video.isFavorite ? Colors.red : Colors.grey,
-                              size: 40,
-                            ),
-                          ),
-                          Text(
-                            video.favoriteCount.toString(),
-                            textAlign: TextAlign.end,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
-                              Icons.share,
-                              color: Colors.grey,
-                              size: 30,
-                            ),
-                          ),
-                          Text(
-                            video.shareCount.toString(),
-                            textAlign: TextAlign.end,
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                    ],
+                  Divider(
+                    color: Colors.grey,
+                    height: 3,
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Text(
-                          video.title,
-                          maxLines: 2,
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontSize: 35,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(randomUser.imageUrl),
+                          backgroundColor: Colors.grey,
+                        ),
+                        Spacer(),
+                        Column(
+                          children: [
+                            IconButton(
+                              padding: EdgeInsets.zero,
+                              onPressed: () {
+                                model.manageFavorite(video);
+                              },
+                              icon: Icon(
+                                Icons.favorite,
+                                color:
+                                    video.isFavorite ? Colors.red : Colors.grey,
+                                size: 40,
+                              ),
+                            ),
+                            Text(
+                              video.favoriteCount.toString(),
+                              textAlign: TextAlign.end,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.share,
+                                color: Colors.grey,
+                                size: 30,
+                              ),
+                            ),
+                            Text(
+                              video.shareCount.toString(),
+                              textAlign: TextAlign.end,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.9,
+                          child: Text(
+                            video.title,
+                            maxLines: 2,
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 35,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            if (video.isFavorite && video.isVisble) FavoriteActionView()
-          ],
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              if (video.isFavorite && video.isVisble) FavoriteActionView()
+            ],
+          ),
         ),
       ),
     );
