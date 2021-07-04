@@ -6,6 +6,10 @@ import 'package:http/http.dart' as http;
 
 class CarouselListModel with ChangeNotifier {
   List<CarouselObject> objects = [];
+  int currentINdex = 0;
+  PageController pageController =
+      PageController(initialPage: 0, viewportFraction: 0.75, keepPage: false);
+
   int currentPage = 2;
   int perPage = 10;
 
@@ -48,7 +52,6 @@ class CarouselListModel with ChangeNotifier {
         objects.add(obj);
       }
 
-      isLoading = false;
       currentPage++;
     } catch (e) {
       print(e.toString());

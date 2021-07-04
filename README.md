@@ -28,6 +28,7 @@
     │   ├── auto_hide_top_bar_widget.dart
     │   ├── custom_button.dart
     │   ├── custom_dialog.dart
+    │   ├── origin_carousel.dart
     │   └── overlay_loading_widget.dart
     ├── model
     │   ├── carousel_object.dart
@@ -41,6 +42,7 @@
     │   └── video_manager.dart
     └── screen
         ├── carousels
+        │   ├── carousel_card.dart
         │   └── carousel_list.dart
         ├── common
         │   ├── bottom_tab.dart
@@ -51,6 +53,9 @@
         │   ├── feed_screen.dart
         │   ├── video_player_page.dart
         │   └── video_view.dart
+        ├── inline
+        │   ├── inline_detail_screen.dart
+        │   └── inline_screen.dart
         ├── root.dart
         ├── upload
         │   ├── confirm_screen.dart
@@ -77,9 +82,10 @@ dependencies:
     sdk: flutter
   badges: ^2.0.1
   cached_network_image: ^3.0.0
-  connectivity_plus: ^1.0.4
+  chewie: ^1.2.2
   cupertino_icons: ^1.0.3
   image_picker: ^0.8.0+4
+  internet_connection_checker: ^0.0.1+1
   provider: ^5.0.0
   video_player: ^2.1.6
   video_thumbnail: ^0.3.3

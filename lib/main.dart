@@ -1,12 +1,13 @@
 import 'package:car_app/src/model/user.dart';
 import 'package:car_app/src/model/video.dart';
 import 'package:car_app/src/provider/favorite_manager.dart';
+import 'package:car_app/src/provider/network_manager.dart';
 import 'package:car_app/src/provider/random_user_manager.dart';
 import 'package:car_app/src/provider/video_manager.dart';
 import 'package:car_app/src/screen/common/bottom_tab.dart';
 import 'package:car_app/src/screen/feed/favorite_screen.dart';
-import 'package:car_app/src/screen/common/network_branch.dart';
 import 'package:car_app/src/screen/inline/inline_detail_screen.dart';
+import 'package:car_app/src/screen/root.dart';
 import 'package:car_app/src/screen/users/user_detail_screen.dart';
 import 'package:car_app/src/screen/users/users_screen.dart';
 import 'package:flutter/material.dart';
@@ -32,6 +33,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        StreamProvider<NetworkStatus>(
+          create: (context) => NetworkManager().networkStatusController.stream,
+          initialData: NetworkStatus.Offline,
+        ),
         ChangeNotifierProvider<RandomUserManager>(
           create: (context) => RandomUserManager(),
         ),
@@ -49,38 +54,38 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: "Car App",
-        theme: ThemeData(
-            primarySwatch: Colors.blue,
-            scaffoldBackgroundColor: Colors.black,
-            appBarTheme: AppBarTheme(
-              backgroundColor: Colors.grey,
-              brightness: Brightness.dark,
-            )),
-        routes: {
-          UsersScreen.routeName: (context) => UsersScreen(),
-          FavoritsScreen.routeName: (context) => FavoritsScreen(),
-        },
+          title: "Car App",
+          theme: ThemeData(
+              scaffoldBackgroundColor: Colors.black,
+              appBarTheme: AppBarTheme(
+                backgroundColor: Colors.grey,
+                brightness: Brightness.dark,
+              )),
+          routes: {
+            UsersScreen.routeName: (context) => UsersScreen(),
+            FavoritsScreen.routeName: (context) => FavoritsScreen(),
+          },
 
-        /// with arguments
-        onGenerateRoute: (settings) {
-          if (settings.name == UserDetailScreen.routeName) {
-            final user = settings.arguments as User;
-            return MaterialPageRoute(
-              builder: (context) => UserDetailScreen(user: user),
-            );
-          }
+          /// with arguments
+          onGenerateRoute: (settings) {
+            if (settings.name == UserDetailScreen.routeName) {
+              final user = settings.arguments as User;
+              return MaterialPageRoute(
+                builder: (context) => UserDetailScreen(user: user),
+              );
+            }
 
-          if (settings.name == InlineDetailScreen.routeName) {
-            final video = settings.arguments as Video;
-            return MaterialPageRoute(
-              fullscreenDialog: true,
-              builder: (context) => InlineDetailScreen(video: video),
-            );
-          }
-        },
-        home: NetworkBranch(),
-      ),
+            if (settings.name == InlineDetailScreen.routeName) {
+              final video = settings.arguments as Video;
+              return MaterialPageRoute(
+                fullscreenDialog: true,
+                builder: (context) => InlineDetailScreen(video: video),
+              );
+            }
+          },
+          home: Root()),
     );
   }
 }
+
+// home: NetworkBranch(),

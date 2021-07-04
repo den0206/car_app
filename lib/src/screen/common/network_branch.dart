@@ -2,9 +2,8 @@ import 'dart:async';
 
 import 'package:car_app/src/screen/common/no_wifi_screen.dart';
 import 'package:car_app/src/screen/root.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class NetworkBranch extends StatefulWidget {
   NetworkBranch({Key? key}) : super(key: key);
@@ -14,17 +13,17 @@ class NetworkBranch extends StatefulWidget {
 }
 
 class _NetworkBranchState extends State<NetworkBranch> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.wifi;
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
+  InternetConnectionStatus _connectionStatus =
+      InternetConnectionStatus.disconnected;
+  final InternetConnectionChecker _connectivity = InternetConnectionChecker();
+  late StreamSubscription<InternetConnectionStatus> _connectivitySubscription;
 
   @override
   void initState() {
     super.initState();
-    initConnectivity();
 
     _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+        _connectivity.onStatusChange.listen(_updateConnectionStatus);
   }
 
   @override
@@ -33,24 +32,7 @@ class _NetworkBranchState extends State<NetworkBranch> {
     super.dispose();
   }
 
-  Future<void> initConnectivity() async {
-    late ConnectivityResult result;
-
-    try {
-      result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
-      print(e.toString());
-      return;
-    }
-
-    if (!mounted) {
-      return Future.value(null);
-    }
-
-    return _updateConnectionStatus(result);
-  }
-
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+  Future<void> _updateConnectionStatus(InternetConnectionStatus result) async {
     setState(() {
       _connectionStatus = result;
     });
@@ -59,11 +41,9 @@ class _NetworkBranchState extends State<NetworkBranch> {
   @override
   Widget build(BuildContext context) {
     switch (_connectionStatus) {
-      case ConnectivityResult.wifi:
-      case ConnectivityResult.mobile:
+      case InternetConnectionStatus.connected:
         return Root();
-
-      default:
+      case InternetConnectionStatus.disconnected:
         return NoWifiScreen();
     }
   }

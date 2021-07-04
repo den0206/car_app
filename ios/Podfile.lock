@@ -1,7 +1,4 @@
 PODS:
-  - connectivity_plus (0.0.1):
-    - Flutter
-    - Reachability
   - Flutter (1.0.0)
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
@@ -19,7 +16,6 @@ PODS:
   - libwebp/webp (1.2.0)
   - path_provider (0.0.1):
     - Flutter
-  - Reachability (3.2)
   - sqflite (0.0.2):
     - Flutter
     - FMDB (>= 2.7.5)
@@ -32,7 +28,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - Flutter (from `Flutter`)
   - image_picker (from `.symlinks/plugins/image_picker/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
@@ -45,11 +40,8 @@ SPEC REPOS:
   trunk:
     - FMDB
     - libwebp
-    - Reachability
 
 EXTERNAL SOURCES:
-  connectivity_plus:
-    :path: ".symlinks/plugins/connectivity_plus/ios"
   Flutter:
     :path: Flutter
   image_picker:
@@ -66,13 +58,11 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/wakelock/ios"
 
 SPEC CHECKSUMS:
-  connectivity_plus: 5f0eb61093bec56935f21a1699dd2758bc895587
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_picker: e06f7a68f000bd36f552c1847e33cda96ed31f1f
   libwebp: e90b9c01d99205d03b6bb8f2c8c415e5a4ef66f0
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
-  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   video_player: 9cc823b1d9da7e8427ee591e8438bfbcde500e6e
   video_thumbnail: c4e2a3c539e247d4de13cd545344fd2d26ffafd1
