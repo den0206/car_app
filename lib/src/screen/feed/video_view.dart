@@ -4,7 +4,6 @@ import 'package:car_app/src/screen/users/user_detail_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:car_app/src/data/consts_color.dart';
 import 'package:car_app/src/model/user.dart';
 import 'package:car_app/src/model/video.dart';

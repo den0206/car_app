@@ -49,7 +49,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
     if (widget.isPlaying) {
       await _videoController.play();
     }
-    // await controller.setVolume(1);
+    await _videoController.setVolume(0);
     await _videoController.setLooping(true);
 
     setState(() {

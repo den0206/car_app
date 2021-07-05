@@ -55,6 +55,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           title: "Car App",
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
               scaffoldBackgroundColor: Colors.black,
               appBarTheme: AppBarTheme(
