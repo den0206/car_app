@@ -64,3 +64,109 @@ class _AnimationBackgroundState extends State<AnimationBackground>
     );
   }
 }
+
+class FadeinWidget extends StatefulWidget {
+  FadeinWidget({
+    Key? key,
+    required this.child,
+    this.duration,
+  }) : super(key: key);
+
+  final Widget child;
+  final Duration? duration;
+
+  @override
+  _FadeinWidgetState createState() => _FadeinWidgetState();
+}
+
+class _FadeinWidgetState extends State<FadeinWidget>
+    with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      vsync: this,
+      duration: widget.duration == null
+          ? Duration(milliseconds: 1000)
+          : widget.duration,
+    );
+    animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
+
+    controller.forward();
+
+    animation.addStatusListener(
+      (status) {
+        if (status == AnimationStatus.completed) {
+          controller.stop();
+        }
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    animation.removeStatusListener((status) {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return FadeTransition(opacity: animation, child: widget.child);
+  }
+}
+
+class FanWidget extends StatefulWidget {
+  FanWidget({
+    Key? key,
+    required this.child,
+  }) : super(key: key);
+
+  final Widget child;
+
+  @override
+  _FanWidgetState createState() => _FanWidgetState();
+}
+
+class _FanWidgetState extends State<FanWidget> with TickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation<double> animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        vsync: this, duration: Duration(milliseconds: 1500));
+    animation = CurvedAnimation(parent: controller, curve: Curves.linear);
+
+    controller.forward();
+
+    animation.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        controller.reverse();
+      } else if (status == AnimationStatus.dismissed) {
+        controller.forward();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    animation.removeStatusListener((status) {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return RotationTransition(
+      turns: Tween(begin: 0.1, end: -.1)
+          .chain(CurveTween(curve: Curves.linear))
+          .animate(controller),
+      child: widget.child,
+    );
+  }
+}

@@ -1,4 +1,4 @@
-import 'package:car_app/src/extension/custom_button.dart';
+import 'package:car_app/src/extension/animation_background.dart';
 import 'package:flutter/material.dart';
 
 class NoWifiScreen extends StatelessWidget {
@@ -8,46 +8,44 @@ class NoWifiScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.wifi_off,
-            color: Colors.white,
-            size: 200,
-          ),
-          Text(
-            "No Wi-Fi",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 36,
-              fontWeight: FontWeight.w600,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FanWidget(
+              child: Icon(
+                Icons.wifi_off,
+                color: Colors.blue.withOpacity(0.7),
+                size: 200,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Text(
-            "Check Network",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 26,
-              fontWeight: FontWeight.w600,
-              color: Colors.white,
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.02,
             ),
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          Container(
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.06,
-              child: CustomGradientButton(
-                title: "Retry",
-                onPressed: () {},
-              ))
-        ],
+            Text(
+              "No Wi-Fi",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(
+              height: 30,
+            ),
+            FadeinWidget(
+              child: Text(
+                "Check Network",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

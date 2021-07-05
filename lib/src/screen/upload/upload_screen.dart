@@ -43,57 +43,63 @@ class UploadScreen extends StatelessWidget {
         children: [
           AnimationBackground(images: images),
           Center(
-            child: CustomGradientButton(
-              title: "Upload",
-              endColor: Colors.pink,
-              onPressed: () async {
-                await showModalBottomSheet(
-                  backgroundColor: Colors.transparent,
-                  context: context,
-                  builder: (context) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [Colors.grey, Colors.white.withOpacity(0.0)],
-                          stops: [
-                            0.3,
-                            0.9,
-                          ],
+            child: FadeinWidget(
+              duration: Duration(seconds: 1),
+              child: CustomGradientButton(
+                title: "Upload",
+                endColor: Colors.pink,
+                onPressed: () async {
+                  await showModalBottomSheet(
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              Colors.grey,
+                              Colors.white.withOpacity(0.0)
+                            ],
+                            stops: [
+                              0.3,
+                              0.9,
+                            ],
+                          ),
                         ),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 18),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            ListTile(
-                              leading: Icon(Icons.videocam),
-                              title: Text('Camera'),
-                              onTap: () {
-                                getVideo(ImageSource.camera);
-                              },
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.camera),
-                              title: Text('Gallary'),
-                              onTap: () {
-                                getVideo(ImageSource.gallery);
-                              },
-                            ),
-                            ListTile(
-                              leading: Icon(Icons.close),
-                              title: Text('Cancel'),
-                              onTap: () => Navigator.of(context).pop(),
-                            ),
-                          ],
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 18),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.videocam),
+                                title: Text('Camera'),
+                                onTap: () {
+                                  getVideo(ImageSource.camera);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.camera),
+                                title: Text('Gallary'),
+                                onTap: () {
+                                  getVideo(ImageSource.gallery);
+                                },
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.close),
+                                title: Text('Cancel'),
+                                onTap: () => Navigator.of(context).pop(),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                  );
+                },
+              ),
             ),
           )
         ],

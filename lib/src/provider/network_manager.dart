@@ -8,8 +8,10 @@ class NetworkManager {
   StreamController<NetworkStatus> networkStatusController =
       StreamController<NetworkStatus>();
 
+  InternetConnectionChecker _internetChecker = InternetConnectionChecker();
+
   NetworkManager() {
-    InternetConnectionChecker().onStatusChange.listen((status) {
+    _internetChecker.onStatusChange.listen((status) {
       networkStatusController.add(_getNetworkStatus(status));
     });
   }
